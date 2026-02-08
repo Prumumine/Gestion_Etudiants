@@ -1,0 +1,132 @@
+# -------------------- AUTHENTIFICATION --------------------
+### POST inscription administrateur
+
+
+POST http://localhost:3000/api/auth/connexion
+Content-Type: application/json
+
+{
+  "nom": "Administrateur",
+  "email": "admin12@ecole.com",
+  "password": "admin123"
+}
+### 
+# Copier le TOKEN reçu et le mettre dans Authorization Bearer ci-dessous
+# Exemple : Authorization: Bearer eyJhbGciOi
+
+
+# -------------------- CRUD ETUDIANTS --------------------
+
+### GET tous les étudiants
+GET http://localhost:3000/api/etudiants
+Authorization: Bearer {TOKEN}
+
+###
+
+### GET étudiant par ID
+GET http://localhost:3000/api/etudiants/3
+Authorization: Bearer {TOKEN}
+
+###
+
+### POST créer un étudiant
+POST http://localhost:3000/api/etudiants
+Content-Type: application/json
+Authorization: Bearer {TOKEN}
+
+{
+  "nom": "FARIDA",
+  "prenom": "NAGANDA",
+  "age": 20,
+  "telephone": "0123456789",
+  "niveau": "Licence 3",
+  "filiere": "Informatique",
+  "sexe": "F",
+  "inscription": "A jour",
+  "nationalite": "Burkinabè"
+}
+
+###
+
+### PUT mettre à jour un étudiant
+PUT http://localhost:3000/api/etudiants/3
+Content-Type: application/json
+Authorization: Bearer {TOKEN}
+
+{
+  "nom": "KABORE",
+  "prenom": "Brice",
+  "age": 21,
+  "telephone": "7093425",
+  "niveau": "Licence 2",
+  "filiere": "Informatique",
+  "sexe": "M",
+  "inscription": "A jour",
+  "nationalite": "Burkinabè"
+}
+
+###
+
+### DELETE supprimer un étudiant (soft delete)
+DELETE http://localhost:3000/api/etudiants/1
+Authorization: Bearer {TOKEN}
+
+# -------------------- ARCHIVE --------------------
+
+### GET étudiants archivés
+GET http://localhost:3000/api/archive
+Authorization: Bearer {TOKEN}
+
+###
+
+### PUT restaurer un étudiant
+PUT http://localhost:3000/api/archive/1/restore
+Authorization: Bearer {TOKEN}
+
+# -------------------- HISTORIQUE --------------------
+
+### GET historique des actions
+GET http://localhost:3000/api/historique
+Authorization: Bearer {TOKEN}
+
+# -------------------- PROFIL --------------------
+
+### GET profil utilisateur
+GET http://localhost:3000/api/profil
+Authorization: Bearer {TOKEN}
+
+###
+
+### PUT modifier profil (nom/email)
+PUT http://localhost:3000/api/profil
+Content-Type: application/json
+Authorization: Bearer {TOKEN}
+
+{
+  "nom": "Admin Updated",
+  "email": "adminupdated@example.com"
+}
+
+###
+
+### PUT changer mot de passe
+PUT http://localhost:3000/api/profil/password
+Content-Type: application/json
+Authorization: Bearer {TOKEN}
+
+{
+  "oldPassword": "admin123",
+  "newPassword": "newpassword123"
+}
+
+# -------------------- EXPORT PDF / EXCEL --------------------
+
+### GET export PDF
+GET http://localhost:3000/api/export/pdf
+Authorization: Bearer {TOKEN}
+
+###
+
+### GET export Excel
+GET http://localhost:3000/api/export/excel
+Authorization: Bearer {TOKEN}
