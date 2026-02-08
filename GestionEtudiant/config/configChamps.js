@@ -5,7 +5,7 @@ export const configChamps = {
     const age = Number(v);
     return age >= 18 && age <= 120;
   }, erreurMessage: 'Âge invalide (18-120)' },
-  telephone: { libelle: 'Téléphone', type: 'numerique', requis: true, validation: (v) => /^\d{8}$/.test(v), erreurMessage: 'Téléphone invalide (8 chiffres)' },
+  telephone: { libelle: 'Téléphone', type: 'numerique', requis: true, validation: (v) => /^\d+$/.test(v), erreurMessage: 'Téléphone invalide (chiffres seulement)' },
   niveau: { libelle: 'Niveau', type: 'texte', requis: true },
   filiere: { libelle: 'Filière', type: 'texte', requis: true },
   sexe: { libelle: 'Sexe', type: 'selection', requis: true, options: [
