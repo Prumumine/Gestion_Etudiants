@@ -51,7 +51,7 @@ export default function FormulaireEtudiant({ etudiant, onSave, onCancel, navigat
     Object.keys(configChamps).forEach(champ => {
       const cfg = configChamps[champ];
       if (cfg.requis && !etat.donnees[champ]?.toString().trim()) erreurs[champ] = `${cfg.libelle} requis`;
-      else if (cfg.validation && !cfg.validation(etat.donnees[champ]) && champ === 'age') erreurs[champ] = 'Âge invalide (18-120)';
+      else if (cfg.validation && !cfg.validation(etat.donnees[champ])) erreurs[champ] = cfg.erreurMessage || `${cfg.libelle} invalide`;
     });
     if (etat.donnees.nationalite === 'Autre' && !etat.donnees.nationalitePersonnalisee?.trim()) erreurs.nationalitePersonnalisee = 'Entrer votre nationalité requise';
     setEtat(prev => ({ ...prev, erreurs }));

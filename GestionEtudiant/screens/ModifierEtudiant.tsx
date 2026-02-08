@@ -20,10 +20,25 @@ export default function ModifierEtudiant({ etudiant: etudiantProp, onSave: onSav
 
   useEffect(() => { if(etudiant) setDonnees({ nom:etudiant.nom, prenom:etudiant.prenom, age:etudiant.age?.toString()||'', telephone:etudiant.telephone, niveau:etudiant.niveau, filiere:etudiant.filiere, sexe:etudiant.sexe, inscription:etudiant.inscription||'A jour', nationalite:etudiant.nationalite==='Burkinabè'?'Burkinabè':(etudiant.nationalite?'Autre':''), nationalitePersonnalisee:etudiant.nationalite!=='Burkinabè'?etudiant.nationalite:'' }); }, [etudiant]);
 
-  const gererChangement = (cle,valeur) => { setDonnees(prev=>({...prev,[cle]:valeur})); if(erreurs[cle]) setErreurs(prev=>({...prev,[cle]:null})); };
+  const gererChangement = (cle,valeur) => { setDonnees(prev=>({...prev,[cle]:valeur})); if(erreurs[cle] && valeur.trim() !== '') setErreurs(prev=>({...prev,[cle]:null})); };
+
+  const validerFormulaire = () => {
+    const erreurs = {};
+    Object.keys(configChamps).forEach(champ => {
+      const cfg = configChamps[champ];
+      if (cfg.requis && !donnees[champ]?.toString().trim()) erreurs[champ] = `${cfg.libelle} requis`;
+      else if (cfg.validation && !cfg.validation(donnees[champ])) erreurs[champ] = cfg.erreurMessage || `${cfg.libelle} invalide`;
+    });
+    if (donnees.nationalite === 'Autre' && !donnees.nationalitePersonnalisee?.trim()) erreurs.nationalitePersonnalisee = 'Entrer votre nationalité requise';
+    setErreurs(erreurs);
+    return Object.keys(erreurs).length === 0;
+  };
 
   const gererSoumission = async () => {
-    setErreurs({});
+    if (!validerFormulaire()) {
+      Alert.alert('Erreur', 'Veuillez corriger les erreurs dans le formulaire.');
+      return;
+    }
     const nationaliteFinale = donnees.nationalite==='Autre'?donnees.nationalitePersonnalisee:donnees.nationalite;
     const data = {...donnees, age:Number(donnees.age), nationalite:nationaliteFinale};
     try {
