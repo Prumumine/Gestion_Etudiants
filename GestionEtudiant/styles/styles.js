@@ -79,6 +79,11 @@ export const globalStyles = StyleSheet.create({
 
   // ChampFormulaire
   conteneurPicker: { borderWidth: 1, borderColor: couleurs.inputBorder, borderRadius: 8 },
+  ageCounter: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: couleurs.bordure, borderRadius: 8, paddingVertical: 10, paddingHorizontal: 15, backgroundColor: couleurs.fondSecondaire },
+  ageButton: { width: 40, height: 40, borderRadius: 20, backgroundColor: couleurs.primaire, alignItems: 'center', justifyContent: 'center', marginHorizontal: 10 },
+  ageButtonDisabled: { backgroundColor: couleurs.bordure, opacity: 0.5 },
+  ageButtonText: { color: couleurs.texteInverse, fontSize: 20, fontWeight: 'bold' },
+  ageValue: { fontSize: 18, color: couleurs.textePrimaire, minWidth: 30, textAlign: 'center' },
 
   // Connexion
   loginConteneur: { flex: 1, backgroundColor: couleurs.fond },

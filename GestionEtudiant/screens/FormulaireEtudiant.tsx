@@ -10,7 +10,7 @@ import { NotificationContext } from '../Navigation';
 export default function FormulaireEtudiant({ etudiant, onSave, onCancel, navigation }) {
   const { refreshNotificationCount } = useContext(NotificationContext);
   const [etat, setEtat] = useState({
-    donnees: { nom:'', prenom:'', age:'', telephone:'', niveau:'', filiere:'', sexe:'', inscription:'A jour', nationalite:'', nationalitePersonnalisee:'' },
+    donnees: { nom:'', prenom:'', age:'18', telephone:'', niveau:'', filiere:'', sexe:'', inscription:'A jour', nationalite:'', nationalitePersonnalisee:'' },
     erreurs: {},
     focus: null
   });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { globalStyles } from '../styles/styles';
 
@@ -23,6 +23,36 @@ export const ChampFormulaire = ({ champ, valeur, onChange, erreurs, focus, onFoc
               <Picker.Item key={index} label={option.libelle} value={option.valeur} />
             ))}
           </Picker>
+        </View>
+        {aErreur && <Text style={globalStyles.texteErreur}>{aErreur}</Text>}
+      </View>
+    );
+  }
+
+  if (champ === 'age') {
+    const ageValue = parseInt(valeur) || 18;
+    const canDecrease = ageValue > 18;
+    const canIncrease = ageValue < 120;
+
+    return (
+      <View style={globalStyles.groupeFormulaire}>
+        <Text style={globalStyles.libelle}>{config.libelle}</Text>
+        <View style={[globalStyles.ageCounter, aErreur && globalStyles.saisieErreur]}>
+          <TouchableOpacity
+            style={[globalStyles.ageButton, !canDecrease && globalStyles.ageButtonDisabled]}
+            onPress={() => canDecrease && onChange(champ, (ageValue - 1).toString())}
+            disabled={!canDecrease}
+          >
+            <Text style={globalStyles.ageButtonText}>-</Text>
+          </TouchableOpacity>
+          <Text style={globalStyles.ageValue}>{ageValue}</Text>
+          <TouchableOpacity
+            style={[globalStyles.ageButton, !canIncrease && globalStyles.ageButtonDisabled]}
+            onPress={() => canIncrease && onChange(champ, (ageValue + 1).toString())}
+            disabled={!canIncrease}
+          >
+            <Text style={globalStyles.ageButtonText}>+</Text>
+          </TouchableOpacity>
         </View>
         {aErreur && <Text style={globalStyles.texteErreur}>{aErreur}</Text>}
       </View>

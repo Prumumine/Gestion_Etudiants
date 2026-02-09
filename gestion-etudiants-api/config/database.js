@@ -1,5 +1,6 @@
 const mysql = require('mysql2');
 
+// Configuration fichier .env pour les variables d'environnement
 const db = mysql.createConnection({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'root',
